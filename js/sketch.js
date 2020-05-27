@@ -33,47 +33,54 @@ function setup() {
     paddleLeft = new PaddleLeft(30, 0, 20, 150);
     paddleRight = new PaddleRight(0, 0, 20, 150);
 
-    paddleLeft.leftafficher();
-    paddleRight.rightafficher();
+
 
     ball.x = width / 2;
     ball.y = height / 2;
 
-    // paddleRight.x = width - 30;
+    paddleRight.x = width - 30;
 }
 
 function draw() {
     background(0);
     fill(255);
-    // moveBall();
+    moveBall();
     bounceBall();
     drawElements();
+    paddleLeft.leftafficher();
+    paddleRight.rightafficher();
+    paddleLeft.leftbouger();
+    paddleRight.rightbouger();
 }
 class PaddleLeft {
     constructor(x, y, paddleLeftWidth, paddleLeftHeight) {
-        paddleLeft.x = x;
-        paddleLeft.y = y;
-        paddleLeft.width = paddleLeftWidth;
-        paddleLeft.height = paddleLeftHeight;
+        this.x = x;
+        this.y = y;
+        this.width = paddleLeftWidth;
+        this.height = paddleLeftHeight;
     }
     leftafficher() {
-        paddleLeft.y = mouseX;
-        rect(paddleLeft.x, paddleLeft.y, paddleLeft.width, paddleLeft.height);
-        paddleLeft.y = mouseX;
+        rect(this.x, this.y, this.width, this.height);
+    }
+    leftbouger() {
+        this.y = mouseX;
+        this.y = mouseX;
     }
 }
 
 class PaddleRight {
     constructor(x, y, paddleRightWidth, paddleRightHeight) {
-        paddleRight.x = x;
-        paddleRight.y = y;
-        paddleRight.width = paddleLeftWidth;
-        paddleRight.height = paddleLeftHeight;
+        this.x = x;
+        this.y = y;
+        this.width = paddleRightWidth;
+        this.height = paddleRightHeight;
     }
     rightafficher() {
-        paddleRight.y = mouseY;
-        rect(paddleRight.x, paddleRight.y, paddleRight.width - 30, paddleRight.height);
-        paddleRight.y = mouseY;
+        rect(this.x, this.y, this.width, this.height);
+    }
+    rightbouger() {
+        this.y = mouseY;
+        this.y = mouseY;
     }
 }
 
