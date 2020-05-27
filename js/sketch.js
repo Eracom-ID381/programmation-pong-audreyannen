@@ -9,52 +9,86 @@ let ball = {
     radius: 40
 }
 
-let paddleLeft = {
-    x: 30,
-    y: 0,
-    width: 20,
-    height: 150
-}
+let paddleLeft
+// = {
+//     x: 30,
+//     y: 0,
+//     width: 20,
+//     height: 150
+// }
 
-let paddleRight = {
-    x: 0,
-    y: 0,
-    width: 20,
-    height: 150
-}
+let paddleRight
+// = {
+//     x: 0,
+//     y: 0,
+//     width: 20,
+//     height: 150
+// }
 
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     rectMode(CENTER);
     noStroke();
+    paddleLeft = new PaddleLeft(30, 0, 20, 150);
+    paddleRight = new PaddleRight(0, 0, 20, 150);
+
+    paddleLeft.leftafficher();
+    paddleRight.rightafficher();
 
     ball.x = width / 2;
     ball.y = height / 2;
 
-    paddleRight.x = width - 30;
+    // paddleRight.x = width - 30;
 }
 
 function draw() {
     background(0);
     fill(255);
-    moveBall();
+    // moveBall();
     bounceBall();
     drawElements();
 }
+class PaddleLeft {
+    constructor(x, y, paddleLeftWidth, paddleLeftHeight) {
+        paddleLeft.x = x;
+        paddleLeft.y = y;
+        paddleLeft.width = paddleLeftWidth;
+        paddleLeft.height = paddleLeftHeight;
+    }
+    leftafficher() {
+        paddleLeft.y = mouseX;
+        rect(paddleLeft.x, paddleLeft.y, paddleLeft.width, paddleLeft.height);
+        paddleLeft.y = mouseX;
+    }
+}
+
+class PaddleRight {
+    constructor(x, y, paddleRightWidth, paddleRightHeight) {
+        paddleRight.x = x;
+        paddleRight.y = y;
+        paddleRight.width = paddleLeftWidth;
+        paddleRight.height = paddleLeftHeight;
+    }
+    rightafficher() {
+        paddleRight.y = mouseY;
+        rect(paddleRight.x, paddleRight.y, paddleRight.width - 30, paddleRight.height);
+        paddleRight.y = mouseY;
+    }
+}
 
 function drawElements() {
-    paddleRight.y = mouseY;
-    paddleLeft.y = mouseX;
-    rect(paddleLeft.x, paddleLeft.y, paddleLeft.width, paddleLeft.height);
-    rect(paddleRight.x, paddleRight.y, paddleRight.width, paddleRight.height);
+    // paddleLeft.y = mouseX;
+    // paddleRight.y = mouseY;
+    // rect(paddleLeft.x, paddleLeft.y, paddleLeft.width, paddleLeft.height);
+    // rect(paddleRight.x, paddleRight.y, paddleRight.width, paddleRight.height);
     ellipse(ball.x, ball.y, ball.radius);
     textSize(100);
     textAlign(RIGHT)
     text(scoreLeft, width / 2 - 40, 100);
     textAlign(LEFT)
 
-    text(scoreRight, width/2 + 40 , 100);
+    text(scoreRight, width / 2 + 40, 100);
 
     for (let y = 0; y < height; y = y + 30) {
         rect(width / 2, y, 20, 20);
@@ -70,7 +104,7 @@ function bounceBall() {
         ball.speedY = random(-5, 5);
     }
 
-    // Detection de collision Paddle Left 
+    // Detection de collision Paddle Left
     if (ball.x <= paddleLeft.x + paddleLeft.width * 2 &&
         ball.y >= paddleLeft.y - paddleLeft.height / 2 &&
         ball.y <= paddleLeft.y + paddleLeft.height / 2) {
@@ -92,10 +126,10 @@ function bounceBall() {
     }
 }
 
-function movePaddle() {
-    paddleRight.y = mouseY;
-    paddleLeft.y = mouseX;
-}
+// function movePaddle() {
+//     paddleRight.y = mouseY;
+//     paddleLeft.y = mouseX;
+// }
 
 function moveBall() {
     ball.x += ball.speedX;
