@@ -25,6 +25,8 @@ let paddleRight
 //     height: 150
 // }
 
+let osc
+
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
@@ -42,12 +44,14 @@ function setup() {
 }
 
 function draw() {
-    background(0);
-    fill(255);
+    background(249, 250, 220);
+    fill(236, 242, 64)
     moveBall();
     bounceBall();
     drawElements();
+    fill(80, 197, 183)
     paddleLeft.leftafficher();
+    fill(156, 236, 91)
     paddleRight.rightafficher();
     paddleLeft.leftbouger();
     paddleRight.rightbouger();
@@ -91,14 +95,16 @@ function drawElements() {
     // rect(paddleRight.x, paddleRight.y, paddleRight.width, paddleRight.height);
     ellipse(ball.x, ball.y, ball.radius);
     textSize(100);
+    fill(80, 197, 183)
     textAlign(RIGHT)
     text(scoreLeft, width / 2 - 40, 100);
+    fill(156, 236, 91)
     textAlign(LEFT)
-
     text(scoreRight, width / 2 + 40, 100);
 
+    fill(255, 113, 91)
     for (let y = 0; y < height; y = y + 30) {
-        rect(width / 2, y, 20, 20);
+        rect(width / 2, y, 5, 20);
     }
 }
 
